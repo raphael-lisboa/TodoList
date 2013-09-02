@@ -6,9 +6,13 @@ import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.rpl.todolist.modelo.Tarefa;
 
@@ -21,10 +25,20 @@ public class ListActivity extends Activity {
         
         List<Tarefa> tarefas = carrgaTarefas();
         int layout = android.R.layout.simple_list_item_1;
-        ListAdapter adapter= new ArrayAdapter(this,layout,tarefas);
+        ArrayAdapter<Tarefa> adapter= new ArrayAdapter<Tarefa>(this,layout,tarefas);
         
         ListView list= (ListView)findViewById(R.id.listagem);
         list.setAdapter(adapter);
+        
+        list.setOnItemLongClickListener(new OnItemLongClickListener() {
+        	
+			public boolean onItemLongClick(AdapterView<?> adapter, View view,int posicao, long id) {
+				Toast.makeText(ListActivity.this, "Tarefa "+adapter.getItemAtPosition(posicao), Toast.LENGTH_SHORT).show();
+				return true;
+			}
+
+						
+		});
     }
 
 
@@ -33,9 +47,14 @@ public class ListActivity extends Activity {
     	Tarefa t1= new Tarefa();
     	t1.setId(1l);
     	t1.setTexto("Aparecer na tela");
+    
+    	Tarefa t2= new Tarefa();
+    	t2.setId(1l);
+    	t2.setTexto("Marcar como concluida");
+    	
     	
     	tarefas.add(t1);
-    	
+    	tarefas.add(t2);
     	return tarefas;
 	}
 
