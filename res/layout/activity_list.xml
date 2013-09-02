@@ -1,15 +1,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
     tools:context=".ListActivity" >
 
-<ListView
-    android:id="@+id/listagem"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    <ListView
+        android:id="@+id/listagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top" >
+    </ListView>
+
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nova_tarefa" />
+
+    <Button
+        android:id="@+id/botao"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:text="@string/salvar" />
     
-</ListView>
 
 </LinearLayout>

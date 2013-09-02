@@ -3,7 +3,7 @@ package com.rpl.todolist.modelo;
 public class Tarefa {
 	private Long id;
 	private String texto;
-	private Boolean concluida;
+	private int concluida;
 
 	public Long getId() {
 		return id;
@@ -21,11 +21,11 @@ public class Tarefa {
 		this.texto = texto;
 	}
 
-	public Boolean getConcluida() {
+	public int getConcluida() {
 		return concluida;
 	}
 
-	public void setConcluida(Boolean concluida) {
+	public void setConcluida(int concluida) {
 		this.concluida = concluida;
 	}
 
