@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,28 +18,45 @@ import com.rpl.todolist.modelo.Tarefa;
 
 public class ListActivity extends Activity {
 
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         
         List<Tarefa> tarefas = carrgaTarefas();
-        int layout = android.R.layout.simple_list_item_1;
+        int layout = android.R.layout.simple_list_item_checked;
         ArrayAdapter<Tarefa> adapter= new ArrayAdapter<Tarefa>(this,layout,tarefas);
         
         ListView list= (ListView)findViewById(R.id.listagem);
         list.setAdapter(adapter);
         
+        
+        
         list.setOnItemLongClickListener(new OnItemLongClickListener() {
         	
 			public boolean onItemLongClick(AdapterView<?> adapter, View view,int posicao, long id) {
-				Toast.makeText(ListActivity.this, "Tarefa "+adapter.getItemAtPosition(posicao), Toast.LENGTH_SHORT).show();
+				
+				
+				String strConcluida ="";
+
+			     CheckedTextView check = (CheckedTextView)view;
+			     check.setChecked(!check.isChecked());
+				
+				if(!check.isChecked()){
+					strConcluida=" ainda não "; 
+				}
+				
+				Toast.makeText(ListActivity.this, "Tarefa "+adapter.getItemAtPosition(posicao)+ strConcluida +" concluida", Toast.LENGTH_SHORT).show();
+				
 				return true;
 			}
 
 						
 		});
     }
+    
+
 
 
     private List<Tarefa> carrgaTarefas() {
