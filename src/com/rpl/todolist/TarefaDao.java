@@ -29,7 +29,7 @@ public class TarefaDao extends SQLiteOpenHelper {
 
 	public List<Tarefa> listAll() {
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
-		String[] colunas = { "TEXTO,CONCLUIDA"};
+		String[] colunas = { "ID,TEXTO,CONCLUIDA"};
 		Cursor cursor = null;
 		try {
 			cursor = getWritableDatabase().query("TAREFA", colunas, null, null,	null, null, null);
@@ -39,12 +39,23 @@ public class TarefaDao extends SQLiteOpenHelper {
 		}
 		while (cursor.moveToNext()) {
 			Tarefa tarefa = new Tarefa();
-			tarefa.setTexto(cursor.getString(0));
-			tarefa.setConcluida(cursor.getInt(1));
+			tarefa.setId(cursor.getLong(0));
+			tarefa.setTexto(cursor.getString(1));
+			tarefa.setConcluida(cursor.getInt(2));
 			tarefas.add(tarefa);
 		}
 
 		return tarefas;
+	}
+	
+	public Long update(Tarefa tarefa){
+		ContentValues content = new ContentValues();
+		content.put("TEXTO", tarefa.getTexto());
+		content.put("CONCLUIDA", tarefa.getConcluida());
+		 
+		return	(long) getWritableDatabase().update("TAREFA", content, "ID "+"="+1, null);
+		
+		
 	}
 
 	public TarefaDao(Context context) {

@@ -8,21 +8,24 @@
     <ListView
         android:id="@+id/listagem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top" >
+        android:layout_height="fill_parent"
+        android:scrollbarStyle="insideOverlay" >
     </ListView>
 
     <EditText
         android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nova_tarefa" />
+        android:ems="10"
+        android:hint="@string/nova_tarefa" >
+
+        <requestFocus />
+    </EditText>
 
     <Button
         android:id="@+id/botao"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:text="@string/salvar" />
-    
 
 </LinearLayout>
