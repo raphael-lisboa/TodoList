@@ -15,20 +15,21 @@ import com.rpl.todolist.modelo.Tarefa;
 public class TarefaDao extends SQLiteOpenHelper {
 
 	private static final String NOME_DO_BANCO = "TODO";
-	private static final int VERSAO = 3;
-
-	public void save(Tarefa tarefa) {
+	private static final int VERSAO = 4;
+	private static String DDL_CREATE = "CREATE TABLE TAREFA  ( ID INTEGER PRIMARY KEY, TEXTO Text, CONCLUIDA INTEGER );";
+	public long save(Tarefa tarefa) {
 
 		ContentValues content = new ContentValues();
 		content.put("TEXTO", tarefa.getTexto());
+		content.put("CONCLUIDA", 0);
 
-		getWritableDatabase().insert("TAREFA", null, content);
-
+		long id =	getWritableDatabase().insert("TAREFA", null, content);
+		return id;
 	}
 
 	public List<Tarefa> listAll() {
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
-		String[] colunas = { "TEXTO"};
+		String[] colunas = { "TEXTO,CONCLUIDA"};
 		Cursor cursor = null;
 		try {
 			cursor = getWritableDatabase().query("TAREFA", colunas, null, null,	null, null, null);
@@ -39,7 +40,7 @@ public class TarefaDao extends SQLiteOpenHelper {
 		while (cursor.moveToNext()) {
 			Tarefa tarefa = new Tarefa();
 			tarefa.setTexto(cursor.getString(0));
-
+			tarefa.setConcluida(cursor.getInt(1));
 			tarefas.add(tarefa);
 		}
 
@@ -52,18 +53,18 @@ public class TarefaDao extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String ddl = "CREATE TABLE TAREFA  ( ID INTEGER PRIMARY KEY, TEXTO Text );";
+		
 
-		db.execSQL(ddl);
+		db.execSQL(DDL_CREATE);
 
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
-		String ddl = "DROP TABLE IF EXISTS TAREFA ;";
+		String drop = "DROP TABLE IF EXISTS TAREFA ;";
 
-		getWritableDatabase().execSQL(ddl);
-		this.onCreate(db);
+		db.execSQL(drop);
+		db.execSQL(DDL_CREATE);
 	}
 
 }
