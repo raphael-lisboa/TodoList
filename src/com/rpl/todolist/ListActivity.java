@@ -30,17 +30,13 @@ public class ListActivity extends Activity {
 
 		dao = new TarefaDao(this);
 
-		List<Tarefa> tarefas = carrgaTarefas();
-		int layout = android.R.layout.simple_list_item_checked;
-		ArrayAdapter<Tarefa> adapter = new ArrayAdapter<Tarefa>(this, layout,
-				tarefas);
+		
 
 		list = (ListView) findViewById(R.id.listagem);
 
 		edit = (EditText) findViewById(R.id.input);
 
-		list.setAdapter(adapter);
-
+		carrgaTarefas();
 		Button botao = (Button) findViewById(R.id.botao);
 
 		botao.setOnClickListener(new OnClickListener() {
@@ -53,7 +49,7 @@ public class ListActivity extends Activity {
 
 				dao.save(tarefa);
 				dao.close();
-
+				carrgaTarefas();
 				edit.setText("");
 			}
 		});
@@ -84,10 +80,15 @@ public class ListActivity extends Activity {
 		});
 	}
 
-	private List<Tarefa> carrgaTarefas() {
+	
+	
+	private void carrgaTarefas() {
 		List<Tarefa> tarefas = dao.listAll();
 		dao.close();
-		return tarefas;
+		
+		int layout = android.R.layout.simple_list_item_checked;
+		ArrayAdapter<Tarefa> adapter = new ArrayAdapter<Tarefa>(this, layout,tarefas);
+		list.setAdapter(adapter);
 	}
 
 }

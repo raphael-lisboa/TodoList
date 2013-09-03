@@ -15,13 +15,12 @@ import com.rpl.todolist.modelo.Tarefa;
 public class TarefaDao extends SQLiteOpenHelper {
 
 	private static final String NOME_DO_BANCO = "TODO";
-	private static final int VERSAO = 7;
+	private static final int VERSAO = 3;
 
 	public void save(Tarefa tarefa) {
 
 		ContentValues content = new ContentValues();
 		content.put("TEXTO", tarefa.getTexto());
-		content.put("CONCLUIDA", tarefa.getConcluida());
 
 		getWritableDatabase().insert("TAREFA", null, content);
 
@@ -29,19 +28,17 @@ public class TarefaDao extends SQLiteOpenHelper {
 
 	public List<Tarefa> listAll() {
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
-		String[] colunas = { "ID", "TEXTO"};
+		String[] colunas = { "TEXTO"};
 		Cursor cursor = null;
 		try {
-			cursor = getWritableDatabase().query("TAREFA", colunas, null, null,
-					null, null, null);
+			cursor = getWritableDatabase().query("TAREFA", colunas, null, null,	null, null, null);
 		} catch (Exception ex) {
 			Log.d("TAG", "ERRO " +ex.getLocalizedMessage());
 			return tarefas;
 		}
 		while (cursor.moveToNext()) {
 			Tarefa tarefa = new Tarefa();
-			tarefa.setId(cursor.getLong(0));
-			tarefa.setTexto(cursor.getString(1));
+			tarefa.setTexto(cursor.getString(0));
 
 			tarefas.add(tarefa);
 		}
