@@ -28,7 +28,7 @@ public class ListActivity extends Activity {
 		dao = new TarefaDao(this);
 		list = (ListView) findViewById(R.id.listagem);
 		edit = (EditText) findViewById(R.id.input);
-
+		list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		carrgaTarefas();
 		Button botao = (Button) findViewById(R.id.botao);
 

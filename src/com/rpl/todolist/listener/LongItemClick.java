@@ -25,14 +25,15 @@ public class LongItemClick implements OnItemLongClickListener {
 		CheckedTextView check = (CheckedTextView) view;
 		check.setChecked(!check.isChecked());
 
-		if (!check.isChecked()) {
+		if (check.isChecked()) {
 			tarefa.setConcluida(1);
 		}else{
 			tarefa.setConcluida(0);
 		}
 		try{
-			dao.update(tarefa);
+			long modificados =dao.update(tarefa);
 			Toast.makeText(context,"Tarefa " + adapter.getItemAtPosition(posicao)	+" atualizada",Toast.LENGTH_SHORT).show();
+			dao.close();
 		}catch(Exception e){
 			Toast.makeText(context,"Erro ao atualizar "+ e.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
 			Log.e("TAG", e.getLocalizedMessage());

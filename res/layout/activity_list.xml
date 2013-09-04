@@ -8,14 +8,23 @@
     <ListView
         android:id="@+id/listagem"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:scrollbarStyle="insideOverlay" >
+        android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="0.09"
+        android:minWidth="40dp"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarStyle="outsideInset"  
+        
+        >
+
     </ListView>
 
     <EditText
         android:id="@+id/input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="top"
         android:ems="10"
         android:hint="@string/nova_tarefa" >
 
@@ -25,7 +34,7 @@
     <Button
         android:id="@+id/botao"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="40dp"
         android:text="@string/salvar" />
 
 </LinearLayout>

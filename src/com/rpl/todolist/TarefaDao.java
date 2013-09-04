@@ -53,7 +53,7 @@ public class TarefaDao extends SQLiteOpenHelper {
 		content.put("TEXTO", tarefa.getTexto());
 		content.put("CONCLUIDA", tarefa.getConcluida());
 		 
-		return	(long) getWritableDatabase().update("TAREFA", content, "ID "+"="+1, null);
+		return	(long) getWritableDatabase().update("TAREFA", content, "ID "+"="+tarefa.getId(), null);
 		
 		
 	}
