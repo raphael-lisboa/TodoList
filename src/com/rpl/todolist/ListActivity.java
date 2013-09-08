@@ -3,7 +3,11 @@ package com.rpl.todolist;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -48,33 +52,55 @@ public class ListActivity extends Activity {
 		});
 
 		list.setOnItemLongClickListener(new LongItemClick(this));
-		
-		list.setOnItemClickListener( new ShortItemClick(this));
+
+		list.setOnItemClickListener(new ShortItemClick(this));
 
 	}
 
-	
-	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+
+		menuInflater.inflate(R.menu.menu_principal, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.novo: {
+			Intent intent = new Intent(ListActivity.this, Formulario.class);
+			startActivity(intent);
+		}break;
+		case R.id.sobre: {
+			// nada por enquanto
+		}
+
+		default:
+			break;
+		}
+
+		return true;
+	}
+
 	private void carrgaTarefas() {
 		List<Tarefa> tarefas = dao.listAll();
 		dao.close();
-		
-		int layout = android.R.layout.simple_list_item_checked;
-		ArrayAdapter<Tarefa> adapter = new ArrayAdapter<Tarefa>(this, layout,tarefas);
-		
-		list.setAdapter(adapter);
-		
-//		marcar os ja selecionados
-		for(int i=0 ;i<tarefas.size();i++){
-			if(tarefas.get(i).getConcluida()==1){
 
-				
+		int layout = android.R.layout.simple_list_item_checked;
+		ArrayAdapter<Tarefa> adapter = new ArrayAdapter<Tarefa>(this, layout, tarefas);
+
+		list.setAdapter(adapter);
+
+		// marcar os ja selecionados
+		for (int i = 0; i < tarefas.size(); i++) {
+			if (tarefas.get(i).getConcluida() == 1) {
+
 				list.setItemChecked(i, true);
 			}
-			
+
 		}
-		
-		
+
 	}
 
 }
