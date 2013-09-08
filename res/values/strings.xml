@@ -6,5 +6,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="nova_tarefa">Nova Tarefa</string>
     <string name="salvar">Salvar</string>
+    <string name="title_activity_formulario">Formulario</string>
+    <string name="titulo_da_atividade">Titulo da Atividade</string>
+    <string name="descri_o_da_atividade1">Descrição da Atividade1</string>
+    <string name="titulo">Titulo</string>
+    <string name="descri_o_da_atividade">Descrição da atividade</string>
+    <string name="data">Data</string>
+    <string name="local">Local</string>
+    <string name="cadastro_de_nova_atividade">Cadastro de nova atividade</string>
+    <string name="rua_de_la_n_100">Rua de la , n 100</string>
+    <string name="rua_de_la_n100">Rua de la , n100</string>
 
 </resources>
