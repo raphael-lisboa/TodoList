@@ -48,6 +48,8 @@ public class ListActivity extends Activity {
 		});
 
 		list.setOnItemLongClickListener(new LongItemClick(this));
+		
+		list.setOnItemClickListener( new ShortItemClick(this));
 
 	}
 
@@ -65,6 +67,8 @@ public class ListActivity extends Activity {
 //		marcar os ja selecionados
 		for(int i=0 ;i<tarefas.size();i++){
 			if(tarefas.get(i).getConcluida()==1){
+
+				
 				list.setItemChecked(i, true);
 			}
 			

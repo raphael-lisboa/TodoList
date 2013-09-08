@@ -78,4 +78,9 @@ public class TarefaDao extends SQLiteOpenHelper {
 		db.execSQL(DDL_CREATE);
 	}
 
+	public void delete(Tarefa tarefa) {
+		String whereClause= "id= "+tarefa.getId();
+		getWritableDatabase().delete("TAREFA", whereClause,null);
+	}
+
 }
