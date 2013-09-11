@@ -20,21 +20,4 @@
 
     </ListView>
 
-    <EditText
-        android:id="@+id/input"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="top"
-        android:ems="10"
-        android:hint="@string/nova_tarefa" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/botao"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="@string/salvar" />
-
 </LinearLayout>

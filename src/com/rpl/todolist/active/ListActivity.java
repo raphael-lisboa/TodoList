@@ -1,4 +1,4 @@
-package com.rpl.todolist;
+package com.rpl.todolist.active;
 
 import java.util.List;
 
@@ -8,19 +8,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
+import com.rpl.todolist.R;
+import com.rpl.todolist.TarefaDao;
 import com.rpl.todolist.listener.LongItemClick;
+import com.rpl.todolist.listener.ShortItemClick;
 import com.rpl.todolist.modelo.Tarefa;
 
 public class ListActivity extends Activity {
 
-	private EditText edit;
 	private TarefaDao dao;
 	private ListView list;
 
@@ -31,30 +29,19 @@ public class ListActivity extends Activity {
 
 		dao = new TarefaDao(this);
 		list = (ListView) findViewById(R.id.listagem);
-		edit = (EditText) findViewById(R.id.input);
 		list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		carrgaTarefas();
-		Button botao = (Button) findViewById(R.id.botao);
-
-		botao.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				Tarefa tarefa = new Tarefa();
-				tarefa.setTexto(edit.getText().toString());
-
-				dao.save(tarefa);
-				dao.close();
-				carrgaTarefas();
-				edit.setText("");
-			}
-		});
-
+		
 		list.setOnItemLongClickListener(new LongItemClick(this));
 
 		list.setOnItemClickListener(new ShortItemClick(this));
 
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		carrgaTarefas();
 	}
 
 	@Override
