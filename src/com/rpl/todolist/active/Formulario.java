@@ -1,6 +1,7 @@
 package com.rpl.todolist.active;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +35,9 @@ public class Formulario extends Activity {
 
 				dao.save(tarefa);
 				dao.close();
+				
+				Intent intent = new Intent(Formulario.this, ListActivity.class);
+				startActivity(intent);
 
 			}
 
